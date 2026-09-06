@@ -1,0 +1,478 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Usman Anwar Portfolio Design System
+  Luxury Obsidian + Emerald Gold
+*/
+
+@layer base {
+  :root {
+    /* Main background */
+    --background: 168 28% 5%;
+    --foreground: 42 30% 96%;
+
+    /* Cards */
+    --card: 166 24% 8%;
+    --card-foreground: 30 25% 96%;
+
+    /* Popovers */
+    --popover: 166 26% 7%;
+    --popover-foreground: 30 25% 96%;
+
+    /*
+      Main Orange Accent
+      Similar to Tailwind orange-500
+    */
+    --primary: 43 78% 61%;
+    --primary-foreground: 168 28% 5%;
+
+    /* Lighter orange glow */
+    --primary-glow: 158 52% 54%;
+
+    /* Same orange accent system */
+    --secondary: 158 49% 42%;
+    --secondary-foreground: 42 30% 96%;
+
+    /* Muted colors */
+    --muted: 166 18% 13%;
+    --muted-foreground: 160 9% 68%;
+
+    /* Accent */
+    --accent: 43 78% 61%;
+    --accent-foreground: 168 28% 5%;
+
+    /* Error color */
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 30 25% 96%;
+
+    /* Borders and inputs */
+    --border: 164 17% 20%;
+    --input: 166 20% 12%;
+    --ring: 43 78% 61%;
+
+    --radius: 0.75rem;
+
+    /* Orange gradients */
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(43 78% 61%),
+      hsl(158 49% 42%)
+    );
+
+    --gradient-soft: linear-gradient(
+      135deg,
+      hsl(43 78% 61% / 0.14),
+      hsl(158 49% 42% / 0.06)
+    );
+
+    --gradient-glow: radial-gradient(
+      circle at 50% 50%,
+      hsl(158 49% 42% / 0.2),
+      transparent 70%
+    );
+
+    --gradient-text: linear-gradient(
+      135deg,
+      hsl(43 88% 72%),
+      hsl(158 54% 57%)
+    );
+
+    --gradient-border: linear-gradient(
+      135deg,
+      hsl(43 78% 61% / 0.6),
+      hsl(158 49% 42% / 0.12)
+    );
+
+    /* Shadows */
+    --shadow-glow:
+      0 0 44px hsl(43 78% 61% / 0.22);
+
+    --shadow-glow-purple:
+      0 0 44px hsl(158 49% 42% / 0.24);
+
+    --shadow-elegant:
+      0 24px 64px -24px hsl(43 78% 61% / 0.3);
+
+    --shadow-card:
+      0 12px 40px hsl(168 50% 2% / 0.72);
+
+    /* Transitions */
+    --transition-smooth:
+      cubic-bezier(0.4, 0, 0.2, 1);
+
+    --transition-bounce:
+      cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Fonts */
+    --font-display:
+      'Playfair Display', serif;
+
+    --font-body:
+      'Manrope', sans-serif;
+
+    --font-mono:
+      'JetBrains Mono', monospace;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    cursor: auto;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+
+    cursor: auto;
+
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+
+    background-image:
+      radial-gradient(
+        ellipse 70% 40% at 50% -10%,
+        hsl(43 78% 48% / 0.12),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 50% 40% at 100% 50%,
+        hsl(158 49% 34% / 0.09),
+        transparent
+      );
+
+    background-attachment: fixed;
+  }
+
+  a,
+  button,
+  [role='button'] {
+    cursor: pointer;
+  }
+
+  input,
+  textarea,
+  select {
+    cursor: text;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+    font-weight: 700;
+  }
+}
+
+@layer components {
+  /* Orange gradient text */
+  .text-gradient {
+    background: var(--gradient-text);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Glass cards */
+  .glass-card {
+    background: hsl(166 24% 9% / 0.76);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid hsl(43 32% 30% / 0.34);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Orange glowing border */
+  .glow-border {
+    position: relative;
+  }
+
+  .glow-border::before {
+    content: '';
+
+    position: absolute;
+    inset: -1px;
+
+    border-radius: inherit;
+    padding: 1px;
+
+    background: var(--gradient-border);
+
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    pointer-events: none;
+  }
+
+  /* Hover lift */
+  .hover-lift {
+    transition:
+      transform 0.3s var(--transition-smooth),
+      box-shadow 0.3s var(--transition-smooth);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-elegant);
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-slow {
+    animation: float 10s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.8s var(--transition-smooth) both;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out both;
+  }
+
+  .animate-spin-slow {
+    animation: spin 12s linear infinite;
+  }
+
+  .animate-spin-reverse {
+    animation: spin-reverse 18s linear infinite;
+  }
+
+  .animate-marquee-left {
+    animation: marquee-left 35s linear infinite;
+  }
+
+  .animate-marquee-right {
+    animation: marquee-right 40s linear infinite;
+  }
+
+  .animate-blob {
+    animation: blob 15s ease-in-out infinite;
+  }
+
+  .animate-tilt {
+    animation: tilt 8s ease-in-out infinite;
+  }
+
+  .hover-tilt {
+    transition:
+      transform 0.4s var(--transition-bounce);
+  }
+
+  .hover-tilt:hover {
+    transform:
+      perspective(800px)
+      rotateX(4deg)
+      rotateY(-4deg)
+      scale(1.03);
+  }
+
+  .hover-glow {
+    transition:
+      box-shadow 0.4s var(--transition-smooth),
+      transform 0.4s var(--transition-smooth);
+  }
+
+  .hover-glow:hover {
+    box-shadow:
+      0 0 30px hsl(var(--primary) / 0.48),
+      0 0 60px hsl(var(--primary) / 0.27);
+
+    transform: translateY(-3px);
+  }
+}
+
+/* Floating animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Orange glow animation */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 20px hsl(var(--primary) / 0.22);
+  }
+
+  50% {
+    box-shadow:
+      0 0 50px hsl(var(--primary) / 0.45);
+  }
+}
+
+/* Fade up animation */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Reverse spinning animation */
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+/* Marquee left */
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Marquee right */
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Background blob */
+@keyframes blob {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform:
+      translate(20px, -30px)
+      scale(1.05);
+  }
+
+  66% {
+    transform:
+      translate(-15px, 20px)
+      scale(0.97);
+  }
+}
+
+/* Tilt animation */
+@keyframes tilt {
+  0%,
+  100% {
+    transform: rotate(-1deg);
+  }
+
+  50% {
+    transform: rotate(1deg);
+  }
+}
+
+/*
+  Laptop ka original cursor visible rahega
+*/
+html,
+body {
+  cursor: auto;
+}
+
+a,
+button,
+[role='button'] {
+  cursor: pointer;
+}
+
+/*
+  Original cursor ke neeche orange dot
+*/
+.normal-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  z-index: 999999;
+
+  width: 8px;
+  height: 8px;
+
+  border: 1px solid hsl(30 100% 75% / 0.55);
+  border-radius: 50%;
+
+  background: var(--gradient-primary);
+
+  box-shadow:
+    0 0 6px hsl(var(--primary) / 0.95),
+    0 0 14px hsl(var(--primary) / 0.65),
+    0 0 24px hsl(var(--primary) / 0.35);
+
+  opacity: 0;
+
+  pointer-events: none;
+  will-change: transform;
+
+  transition:
+    opacity 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Touch/mobile devices */
+@media (pointer: coarse) {
+  .normal-cursor-dot {
+    display: none !important;
+  }
+}
